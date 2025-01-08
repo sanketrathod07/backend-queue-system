@@ -22,4 +22,4 @@ ENV JWT_SECRET=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
 ENV RABBITMQ_URI=amqp://localhost
 
 # Command to run your app
-CMD ["node", "server.js"]
+CMD ["node", "/src/server.js"]
