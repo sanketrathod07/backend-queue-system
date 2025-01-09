@@ -14,12 +14,10 @@ const connectRabbitMQ = async () => {
             if (message) {
                 const content = message.content.toString();
                 console.log(`Received message: ${content}`);
-                
-                // Simulate processing
                 setTimeout(() => {
                     console.log(`Processed message: ${content}`);
                     channel.ack(message);
-                }, 1000); // Simulate 1-second processing
+                }, 1000);
             }
         });
     } catch (error) {

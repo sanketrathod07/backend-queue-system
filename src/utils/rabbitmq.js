@@ -2,15 +2,17 @@ const amqp = require('amqplib');
 
 let connection, channel;
 
-const connectRabbitMQ = async () => {
+async function connectRabbitMQ() {
     try {
-        connection = await amqp.connect(process.env.RABBITMQ_URI);
-        channel = await connection.createChannel();
+        connection = await amqp.connect(process.env.RABBITMQ_URL || "amqps://cdgpueym:QE41zAEVR4f0-uzHCbmein8qbMHMo0LH@seal.lmq.cloudamqp.com/cdgpueym");
         console.log('RabbitMQ connected');
+        channel = await connection.createChannel();
+        return { connection, channel };
     } catch (error) {
-        console.error('Failed to connect to RabbitMQ', error);
+        console.error('Failed to connect to RabbitMQ:', error);
+        process.exit(1); // Exits if ConnectRabbitMQ Fails :(
     }
-};
+}
 
 const createQueue = async (queueName) => {
     try {
